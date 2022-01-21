@@ -32,28 +32,31 @@ having count(last_name) > 1;
 
 -- 5. feladat
 -- select * from country;
-select country_id, country from country
+select country_id, country from sakila.country
 where country in('China', 'Afghanistan', 'Israel');
 
 -- Ha az összes város kellene a fent nevezett országokból
+use sakila;
 select city_id, city
 from city left join	country on city.country_id = country.country_id
 where country in('China', 'Afghanistan', 'Israel');
 
 -- 6. feladat
-select avg(length) AS 'Aátlagos film hossz' from film;
+select avg(length) AS 'Aátlagos film hossz' from sakila.film;
 
 -- 7. feladat
 select first_name, last_name, address
 from staff join address on staff.address_id = address.address_id;
 
 -- 8. feladat
+use sakila;
 select first_name, last_name, sum(amount)
 from customer left join payment using(customer_id)
 group by customer.first_name, customer.last_name
 limit 10;
 
 -- 9.feladat
+use sakila;
 select title, first_name, last_name 
 from film left join film_actor using(film_id) left join actor using(actor_id)
 LIMIT 20;
